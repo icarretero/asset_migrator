@@ -1,5 +1,5 @@
 import pytest
-from asset_migrator.src.base import (
+from src.base import (
     Scheduler,
     Migrator,
     Updater,
@@ -8,7 +8,7 @@ from asset_migrator.src.base import (
     UpdaterException,
     OrchestratorException,
 )
-from asset_migrator.src.linear_orchestrator import LinearOrchestrator
+from src.linear_orchestrator import LinearOrchestrator
 
 class StubScheduler(Scheduler):
     def generate_jobs(self):

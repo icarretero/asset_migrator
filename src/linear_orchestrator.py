@@ -1,5 +1,5 @@
 import logging
-from asset_migrator.src.base import (
+from src.base import (
     Orchestrator,
     OrchestratorException,
     SchedulerException,
