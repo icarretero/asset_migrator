@@ -1,6 +1,6 @@
 import logging
 from src.base import Scheduler, SchedulerException
-from src.database import DataBase
+from src.main_db import MainDB
 
 
 class ListScheduler(Scheduler):
@@ -10,30 +10,26 @@ class ListScheduler(Scheduler):
     """
     BATCH_SIZE = 10
 
-    def __init__(self, dbconfig):
+    def __init__(self, main_db):
         super().__init__()
-        self.dbconfig = dbconfig
+        self.main_db= main_db
         self.jobs = []
 
     def generate_jobs(self):
         logging.info("SCHEDULER: starting job generation")
-        id_column = "entry_id"
-        id_path = "path"
-        main_db = DataBase(self.dbconfig)
-        jobs = main_db.all_jobs(
-            table="assets",
-            id_column=id_column,
-            id_path=id_path,
-            batch_size=self.BATCH_SIZE
-        )
+        jobs = self.main_db.get_jobs()
         for (id, path) in jobs:
             self.jobs.append({
                 'id': id,
                 'path': path
             })
-        main_db.close()
+        logging.info(
+            "SCHEDULER: finished job generation with {items} items".format(
+                items=len(self.jobs)
+            )
+        )
 
     def schedule(self):
         for job in self.jobs:
-            logging.info("SCHEDULER: scheduling next job")
+            logging.debug("SCHEDULER: scheduling next job")
             yield job

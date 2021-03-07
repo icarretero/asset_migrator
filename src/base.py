@@ -14,6 +14,10 @@ class UpdaterException(Exception):
     pass
 
 
+class DataBaseException(Exception):
+    pass
+
+
 class Orchestrator:
     def __init__(self, scheduler, migrator, updater):
         self.scheduler = scheduler
