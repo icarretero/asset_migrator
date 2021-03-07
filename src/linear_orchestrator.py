@@ -27,3 +27,6 @@ class LinearOrchestrator(Orchestrator):
             self.scheduler.generate_jobs()
         except SchedulerException as e:
             raise OrchestratorException(e)
+        for job in self.scheduler.schedule():
+            self.migrator.migrate(job)
+            self.updater.update(job)

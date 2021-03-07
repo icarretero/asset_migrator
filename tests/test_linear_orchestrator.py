@@ -15,8 +15,8 @@ class StubScheduler(Scheduler):
         pass
 
     def schedule(self):
-        return "this will be a job"
-
+        for job in ["job"]:
+            yield job
 
 class StubFailJobsScheduler(Scheduler):
     def generate_jobs(self):
@@ -27,12 +27,12 @@ class StubFailJobsScheduler(Scheduler):
 
 
 class StubMigrator(Migrator):
-    def migrate(self):
+    def migrate(self, job):
         pass
 
 
 class StubUpdater(Updater):
-    def update(self):
+    def update(self, job):
         pass
 
 
