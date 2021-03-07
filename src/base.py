@@ -15,6 +15,11 @@ class UpdaterException(Exception):
 
 
 class Orchestrator:
+    def __init__(self, scheduler, migrator, updater):
+        self.scheduler = scheduler
+        self.migrator = migrator
+        self.updater = updater
+
     def start(self):
         raise NotImplementedError
 
