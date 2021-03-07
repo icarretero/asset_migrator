@@ -1,3 +1,4 @@
+import logging
 from asset_migrator.src.base import (
     Orchestrator,
     OrchestratorException,
@@ -23,6 +24,7 @@ class LinearOrchestrator(Orchestrator):
         )
 
     def start(self):
+        logging.info("ORCHESTRATOR: Starting process")
         try:
             self.scheduler.generate_jobs()
         except SchedulerException as e:
