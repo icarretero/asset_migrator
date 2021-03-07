@@ -1,5 +1,14 @@
-# asset_migrator
-Migrate assets between buckets
+# Asset Migrator
+A pet project dedicated to migrate assets between buckets. It updates a list of paths in a database and migrates the files from one source bucket to a destination one.
+
+## Next Steps:
+- Add tests to MainDB and MariaDB
+- Work on Job object
+- Add TableScheduler using another MariaDB and deprecate ListScheduler
+- Implement Migrator
+- Implement Updater
+- Implement settings from yaml and ENV-VARS (secrets)
+- Create Dockerfile and CI for image
 
 ## Local instructions for Development:
 If you want to populate a local MariaDB for a dev enviroment follow these steps. It is asumed you have a terminal capable of running bash and docker daemon installed and working.
