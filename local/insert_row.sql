@@ -5,3 +5,10 @@ INSERT INTO assets (path) VALUES (
         ".png"
     )
 );
+INSERT INTO assets (path) VALUES (
+    CONCAT(
+        "avatar/avatar",
+        FLOOR(rand() * 100000),
+        ".png"
+    )
+);

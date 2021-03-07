@@ -25,7 +25,7 @@ if [[ $CREATEOBJECTS = "true" ]]; then
     echo "-> DB and tables created"
 fi
 
-echo "-> Generating $iterations records"
+echo "-> Generating $iterations old and $iterations new records"
 for ((i = 0 ; i < $iterations ; i++)); do
     mysql -u $user -h $host assets < insert_row.sql
 done

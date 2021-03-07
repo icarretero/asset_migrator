@@ -6,6 +6,8 @@ class TableConfig:
     name: str
     id_name: str
     path_name: str
+    old_prefix: str
+    new_prefix: str
 
 class MainDB:
 
@@ -16,10 +18,11 @@ class MainDB:
         self.table_config = table_config
 
     def get_jobs(self):
-        query = "SELECT {id}, {path} FROM {table}".format(
+        query = "SELECT {id}, {path} FROM {table} WHERE {path} like '{prefix}/%'".format(
             id=self.table_config.id_name,
             path=self.table_config.path_name,
-            table=self.table_config.name
+            table=self.table_config.name,
+            prefix=self.table_config.old_prefix
         )
         return self.database.batch_select(query, self.BATCH_SIZE)
 

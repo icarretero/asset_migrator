@@ -18,7 +18,9 @@ DB_CONFIG = MariaDBConfig(
 ASSET_TABLE_CONFIG = TableConfig(
     "assets",
     "entry_id",
-    "path"
+    "path",
+    "images",
+    "avatar"
 )
 
 def main():
