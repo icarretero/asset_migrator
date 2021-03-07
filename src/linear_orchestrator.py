@@ -1,4 +1,10 @@
-from asset_migrator.src.base import Orchestrator, OrchestratorException
+from asset_migrator.src.base import (
+    Orchestrator,
+    OrchestratorException,
+    SchedulerException,
+    MigratorException,
+    UpdaterException
+)
 
 """
     LinearOrchestrator is a sequencial orchestrator without concurrency:
@@ -17,4 +23,7 @@ class LinearOrchestrator(Orchestrator):
         )
 
     def start(self):
-        pass
+        try:
+            self.scheduler.generate_jobs()
+        except SchedulerException as e:
+            raise OrchestratorException(e)
