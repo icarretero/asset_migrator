@@ -24,6 +24,11 @@ class StubEmptyDB(DataBase):
             yield item
 
 
+class StubFailingDB(DataBase):
+    def batch_select(self, query, batch_size):
+        raise DataBaseException("ARRRRRG")
+
+
 @pytest.fixture
 def db():
     return StubDB()
@@ -32,6 +37,11 @@ def db():
 @pytest.fixture
 def empty_db():
     return StubEmptyDB()
+
+
+@pytest.fixture
+def failing_db():
+    return StubFailingDB()
 
 
 @pytest.fixture
@@ -86,3 +96,8 @@ def test_query_called_properly(db, table_config, query):
     main_db = MainDB(mock_db, table_config)
     jobs = main_db.get_jobs()
     mock_db.batch_select.assert_called_once_with(query, main_db.BATCH_SIZE)
+
+def test_main_db_handles_database_error(failing_db, table_config):
+    main_db = MainDB(failing_db, table_config)
+    with pytest.raises(MainDBException):
+        jobs = main_db.get_jobs()

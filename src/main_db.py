@@ -33,7 +33,11 @@ class MainDB:
             table=self.table_config.name,
             prefix=self.table_config.old_prefix
         )
-        return self.database.batch_select(query, self.BATCH_SIZE)
+        try:
+            jobs = self.database.batch_select(query, self.BATCH_SIZE)
+        except DataBaseException as e:
+            raise MainDBException("DataBase Error") from e
+        return jobs
 
     def update_jobs(self):
         pass
