@@ -1,6 +1,6 @@
 import mariadb
 from dataclasses import dataclass
-from src.base import DataBaseException
+from src.base import DataBase, DataBaseException
 
 
 @dataclass
@@ -12,7 +12,7 @@ class MariaDBConfig:
     port: str = 3306
 
 
-class MariaDB:
+class MariaDB(DataBase):
 
     def __init__(self, db_config):
         self.db_config = db_config
