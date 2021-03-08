@@ -24,10 +24,23 @@ class DataBaseException(Exception):
 
 class Orchestrator:
     def __init__(self, scheduler, migrator, updater, deleter):
+        self._check_objects_are_instances([
+            (scheduler, Scheduler),
+            (migrator, Migrator),
+            (updater, Updater),
+            (deleter, Deleter),
+        ])
         self.scheduler = scheduler
         self.migrator = migrator
         self.updater = updater
         self.deleter = deleter
+
+    def _check_objects_are_instances(self, tuples_instance_object):
+        for instance, _object in tuples_instance_object:
+            if not isinstance(instance, _object):
+                raise OrchestratorException(
+                    "Wrong Argument Object. Must be a {}.".format(_object)
+                )
 
     def start(self):
         raise NotImplementedError

@@ -52,6 +52,16 @@ def green_path_components():
         'deleter': StubDeleter(),
     }
 
+
+@pytest.fixture
+def wrong_migrator_components():
+    return {
+        'scheduler': StubScheduler(),
+        'migrator': StubScheduler(),
+        'updater': StubUpdater(),
+        'deleter': StubDeleter(),
+    }
+
 @pytest.fixture
 def fail_jobs_generation_components():
     return {
@@ -69,6 +79,11 @@ def test_orchestrator_requires_arguments():
 
 def test_orchestrator_can_be_initialized(green_path_components):
     LinearOrchestrator(**green_path_components)
+
+
+def test_orchestrator_fail_with_wrong_argument_objects(wrong_migrator_components):
+    with pytest.raises(OrchestratorException):
+        LinearOrchestrator(**wrong_migrator_components)
 
 
 def test_start_method_is_implemented(green_path_components):
