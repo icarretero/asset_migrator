@@ -24,7 +24,9 @@ class MainDB:
         if isinstance(table_config, TableConfig):
             self.table_config = table_config
         else:
-            raise MainDBException("Wrong TableConfig objet. Must be a TableConfig")
+            raise MainDBException(
+                "Wrong TableConfig objet. Must be a {}".format(TableConfig)
+            )
 
     def get_jobs(self):
         query = "SELECT {id}, {path} FROM {table} WHERE {path} like '{prefix}/%'".format(
