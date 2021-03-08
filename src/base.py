@@ -44,3 +44,7 @@ class Migrator:
 class Updater:
     def update(self):
         raise NotImplementedError
+
+class DataBase:
+    def batch_select(self, query, batch_size):
+        raise NotImplementedError
