@@ -14,15 +14,20 @@ class UpdaterException(Exception):
     pass
 
 
+class DeleterException(Exception):
+    pass
+
+
 class DataBaseException(Exception):
     pass
 
 
 class Orchestrator:
-    def __init__(self, scheduler, migrator, updater):
+    def __init__(self, scheduler, migrator, updater, deleter):
         self.scheduler = scheduler
         self.migrator = migrator
         self.updater = updater
+        self.deleter = deleter
 
     def start(self):
         raise NotImplementedError
@@ -43,6 +48,11 @@ class Migrator:
 
 class Updater:
     def update(self):
+        raise NotImplementedError
+
+
+class Deleter:
+    def delete(self):
         raise NotImplementedError
 
 class DataBase:

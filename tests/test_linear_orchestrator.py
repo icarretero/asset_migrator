@@ -3,9 +3,11 @@ from src.base import (
     Scheduler,
     Migrator,
     Updater,
+    Deleter,
     SchedulerException,
     MigratorException,
     UpdaterException,
+    DeleterException,
     OrchestratorException,
 )
 from src.linear_orchestrator import LinearOrchestrator
@@ -36,12 +38,18 @@ class StubUpdater(Updater):
         pass
 
 
+class StubDeleter(Deleter):
+    def delete(self, job):
+        pass
+
+
 @pytest.fixture
 def green_path_components():
     return {
         'scheduler': StubScheduler(),
         'migrator': StubMigrator(),
         'updater': StubUpdater(),
+        'deleter': StubDeleter(),
     }
 
 @pytest.fixture
@@ -50,6 +58,7 @@ def fail_jobs_generation_components():
         'scheduler': StubFailJobsScheduler(),
         'migrator': StubMigrator(),
         'updater': StubUpdater(),
+        'deleter': StubDeleter(),
     }
 
 

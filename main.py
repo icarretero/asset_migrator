@@ -3,6 +3,7 @@ from src.linear_orchestrator import LinearOrchestrator
 from src.list_scheduler import ListScheduler
 from src.copy_migrator import CopyMigrator
 from src.one_updater import OneUpdater
+from src.one_deleter import OneDeleter
 from src.main_db import MainDB, TableConfig
 from src.maria_db import MariaDB, MariaDBConfig
 
@@ -33,7 +34,8 @@ def main():
     orchestrator = LinearOrchestrator(
         scheduler=ListScheduler(main_db),
         migrator=CopyMigrator(),
-        updater=OneUpdater()
+        updater=OneUpdater(),
+        deleter=OneDeleter()
     )
     orchestrator.start()
 

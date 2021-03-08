@@ -6,6 +6,7 @@ A pet project dedicated to migrate assets between buckets. It updates a list of 
 - Add TableScheduler using another MariaDB and deprecate ListScheduler
 - Implement Migrator
 - Implement Updater
+- Implement Deleter
 - Implement settings from yaml and ENV-VARS (secrets)
 - Create Dockerfile and CI for image
 - Work on HybridScheduler

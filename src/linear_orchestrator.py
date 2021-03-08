@@ -16,11 +16,12 @@ class LinearOrchestrator(Orchestrator):
         - Sends the update to the scheduler
     """
 
-    def __init__(self, scheduler, migrator, updater):
+    def __init__(self, scheduler, migrator, updater, deleter):
         super().__init__(
             scheduler=scheduler,
             migrator=migrator,
-            updater=updater
+            updater=updater,
+            deleter=deleter
         )
 
     def start(self):
@@ -32,3 +33,4 @@ class LinearOrchestrator(Orchestrator):
         for job in self.scheduler.schedule():
             self.migrator.migrate(job)
             self.updater.update(job)
+            self.deleter.delete(job)
