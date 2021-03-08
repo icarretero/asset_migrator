@@ -1,4 +1,5 @@
 import pytest
+from unittest import mock
 from src.base import DataBase, DataBaseException
 from src.main_db import TableConfig, MainDB, MainDBException
 
@@ -49,6 +50,10 @@ def table_config():
         "prefix2"
     )
 
+@pytest.fixture
+def query():
+    return "SELECT id, path FROM table WHERE path like 'prefix1/%'"
+
 
 def test_main_db_requires_arguments():
     with pytest.raises(TypeError):
@@ -74,3 +79,10 @@ def test_main_db_get_empty_jobs(empty_db, table_config):
     main_db = MainDB(empty_db, table_config)
     jobs = main_db.get_jobs()
     assert len([ job for job in jobs]) == 0
+
+
+def test_query_called_properly(db, table_config, query):
+    mock_db = mock.Mock(spec=db)
+    main_db = MainDB(mock_db, table_config)
+    jobs = main_db.get_jobs()
+    mock_db.batch_select.assert_called_once_with(query, main_db.BATCH_SIZE)
