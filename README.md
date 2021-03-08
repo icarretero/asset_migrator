@@ -8,6 +8,7 @@ A pet project dedicated to migrate assets between buckets. It updates a list of 
 - Implement Updater
 - Implement settings from yaml and ENV-VARS (secrets)
 - Create Dockerfile and CI for image
+- Work on HybridScheduler
 
 ## Local instructions for Development:
 If you want to populate a local MariaDB for a dev enviroment follow these steps. It is asumed you have a terminal capable of running bash and docker daemon installed and working.
